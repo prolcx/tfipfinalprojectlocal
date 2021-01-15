@@ -1,0 +1,30 @@
+
+<div class="row mt-2">
+	<div class="col">
+		<h2 class="display-2">FOOD LAB</h2>
+	</div>
+</div>
+
+<form [formGroup] = 'loginForm'>
+	<div class="form-group">
+		<label id="loginFormField" for="username">Username</label>
+		<input id="username" class="form-control" type="text" placeholder="Username here" formControlName='username'>
+		<!-- <div class="invalid-feedback" *ngIf="errorMessage">
+			{{ errorMessage }}
+		</div> -->
+	</div>
+	<div class="form-group">
+		<label id="loginFormField" for="password">Password</label>
+		<input type="password" id="password" class="form-control" placeholder="Password" formControlName='password'>
+	</div>
+
+	<div class="d-flex justify-content-end align-items-center mt-4">
+		<button (click)='login()' class="btn btn-lg btn-success" [disabled]="loginForm.invalid">
+			<span style="margin-right: 5px !important;">Login</span>
+			<i class="fas fa-door-open"></i>
+		</button>
+	</div>
+</form>
+
+<button (click)='signInWithGoogle()'>Sign in with Google</button>
+<button (click)='signUp()'>Sign Me Up! </button>

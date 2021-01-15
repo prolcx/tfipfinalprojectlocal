@@ -1,0 +1,129 @@
+<h1 class="display-2">GOOD DAY! {{loginUser}}</h1>
+
+<form [formGroup] = 'dashboardForm'>
+  <div>
+    <tr>
+      <td><h4>Your Nutrient Intake Level On: &nbsp;&nbsp;</h4></td>
+      <td><input type="date" formControlName='date' (change)="loading()"></td>
+    </tr>
+  </div>
+</form>
+<br>
+
+<div class="image" *ngIf="imgSign">
+  <img src="../assets/full.gif" alt="" height="256" width="256">
+</div>
+<div class="image" *ngIf="!imgSign">
+  <img src="../assets/hungry.gif" alt="" height="256" width="256">
+</div>
+<div class='bar'>
+  <label id="barText" for="caloriesbar">Calories</label>
+  <div class="progress" id="caloriesbar">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" attr.aria-valuenow ="{{dashBoardProgress.totalCalories}}" aria-valuemin="0" aria-valuemax="100" attr.style="width: {{dashBoardProgress.caloriesPercent}}%">{{dashBoardProgress.caloriesPercent}}% ({{dashBoardProgress.totalCalories}}/{{dashBoardProgress.dailyCalories}})</div>
+  </div>
+</div>
+<br>
+
+<div>
+  <label id="barText" for="saturatedbar">Saturated Fat</label>
+  <div class="progress" id="saturatedbar">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" attr.aria-valuenow ="{{dashBoardProgress.totalSaturated}}" aria-valuemin="0" aria-valuemax="100" attr.style="width: {{dashBoardProgress.saturatedPercent}}%">{{dashBoardProgress.saturatedPercent}}% ({{dashBoardProgress.totalSaturated}}/{{dashBoardProgress.dailySaturated}})</div>
+  </div>
+</div>
+<br>
+<div>
+  <label id="barText" for="transbar">Trans Fat</label>
+  <div class="progress" id="transbar">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" attr.aria-valuenow ="{{dashBoardProgress.totalTrans}}" aria-valuemin="0" aria-valuemax="100" attr.style="width: {{dashBoardProgress.transPercent}}%">{{dashBoardProgress.transPercent}}% ({{dashBoardProgress.totalTrans}}/{{dashBoardProgress.dailyTrans}})</div>
+  </div>
+</div>
+<br>
+<div>
+  <label id="barText" for="carbsbar">Carbohydrates</label>
+  <div class="progress" id="carbsbar">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" attr.aria-valuenow ="{{dashBoardProgress.totalCarbohydrates}}" aria-valuemin="0" aria-valuemax="100" attr.style="width: {{dashBoardProgress.carbohydratesPercent}}%">{{dashBoardProgress.carbohydratesPercent}}% ({{dashBoardProgress.totalCarbohydrates}}/{{dashBoardProgress.dailyCarbohydrates}})</div>
+  </div>
+</div>
+<br>
+<div>
+  <label id="barText" for="sugarbar">Sugar</label>
+  <div class="progress" id="sugarbar">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" attr.aria-valuenow ="{{dashBoardProgress.totalSugar}}" aria-valuemin="0" aria-valuemax="100" attr.style="width: {{dashBoardProgress.sugarPercent}}%">{{dashBoardProgress.sugarPercent}}% ({{dashBoardProgress.totalSugar}}/{{dashBoardProgress.dailySugar}})</div>
+  </div>
+</div>
+<br>
+<div>
+  <label id="barText" for="proteinbar">Protein</label>
+  <div class="progress" id="proteinbar">
+    <div class="progress-bar progress-bar-striped progress-bar-animated dark" role="progressbar" attr.aria-valuenow ="{{dashBoardProgress.totalProtein}}" aria-valuemin="0" aria-valuemax="100" attr.style="width: {{dashBoardProgress.proteinPercent}}%">{{dashBoardProgress.proteinPercent}}% ({{dashBoardProgress.totalProtein}}/{{dashBoardProgress.dailyProtein}})</div>
+  </div>
+</div>
+<br>
+<br>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Food</th>
+      <th scope="col">Calories</th>
+      <th scope="col">Carb</th>
+      <th scope="col">Fat</th>
+      <th scope="col">Sugar</th>
+      <th scope="col">Protein</th>
+      <th scope="col">Cholesterol</th>
+      <th scope="col">Fiber</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of dashboardItem; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{a.food}}</td>
+      <td>{{a.calories}}g</td>
+      <td>{{a.carbohydrates}}g</td>
+      <td>{{a.fat}}g</td>
+      <td>{{a.sugar}}g</td>
+      <td>{{a.protein}}g</td>
+      <td>{{a.cholesterol}}mg</td>
+      <td>{{a.fiber}}g</td>
+      <td align="center"><button (click)="deleteDashBoardItem(a.id)" class="btn btn-danger">X</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary btn-lg btn-block" (click)='addFood()'>Add Food</button>
+<br><br>
+<h4 id="foodAddButton">Food Just Added</h4>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Food</th>
+        <th scope="col">Calories</th>
+        <th scope="col">Carb</th>
+        <th scope="col">Fat</th>
+        <th scope="col">Sugar</th>
+        <th scope="col">Protein</th>
+        <th scope="col">Cholesterol</th>
+        <th scope="col">Fiber</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of todayFoodList; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{a.title}}</td>
+        <td>{{a.calories}}g</td>
+        <td>{{a.carbs}}g</td>
+        <td>{{a.fat}}g</td>
+        <td>{{a.sugar}}g</td>
+        <td>{{a.protein}}g</td>
+        <td>{{a.cholesterol}}mg</td>
+        <td>{{a.fiber}}g</td>
+        <td><button align="center" (click)="deleteJustAddedItem(i)" class="btn btn-danger">X</button></td>
+      </tr>
+    </tbody>
+    <br>
+    <button class="btn btn-success" (click)='saveDiet()'>Save!</button>
+  </table>

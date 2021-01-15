@@ -1,0 +1,27 @@
+.progress {
+    width: 75%;
+    position: absolute;
+    left: 0px;
+    
+
+}
+
+.indicator {
+    position: absolute;
+    right: 250px;
+}
+
+.image { 
+    position: absolute;
+    /* width: 25%; */
+    top: 260px;
+    right: 0px;
+ }
+
+ #foodAddButton {
+     font-weight: 500;
+ }
+
+ #barText {
+     font-weight: 400;
+ }
